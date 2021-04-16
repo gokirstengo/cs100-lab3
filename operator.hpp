@@ -18,4 +18,19 @@ class Operator: public Base {
         }
 };
 
+class Sub: public Operator {
+    public:
+        Sub(Base* leftChild, Base* rightChild) : Operator(leftChild, rightChild) {}
+        virtual double evaluate() {
+            return leftChild->evaluate() - rightChild->evaluate();
+        }
+        virtual string stringify() {
+            string final = "";
+            final += leftChild->stringify();
+            final += " - ";
+            final += rightChild->stringify();
+            return final;
+        }
+};
+
 #endif
