@@ -28,12 +28,12 @@ TEST(OpTest, OpStringPositive) {
 }
 
 TEST(OpTest, OpStringNegative) {
-    Op* test5 = new Op(-1.1);
-    EXPECT_EQ(test5->stringify(), "-1.100000");
+    Op* test5 = new Op(-1.12);
+    EXPECT_EQ(test5->stringify(), "-1.120000");
 }
 TEST(OpTest, OpStringZero) {
     Op* test6 = new Op(0);
-    EXPECT_EQ(test6->stringify(), "0.000000");
+    EXPECT_EQ(test6->stringify(), "0");
 }
 
 //Sub class test
