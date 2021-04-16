@@ -35,5 +35,31 @@ TEST(OpTest, OpStringZero) {
     EXPECT_EQ(test6->stringify(), "0.000000");
 }
 
+//Sub class test
+TEST(SubTest, SubPositiveTest) {
+    Base* leftChild = new Op(5);
+    Base* rightChild = new Op(2);
+    Base* minus = new Sub(leftChild, rightChild);
+
+    EXPECT_EQ(minus->evaluate(), 3);
+    EXPECT_EQ(minus->stringify(), "5 - 2");
+}
+
+TEST(SubTest, SubNegativeTest) {
+    Base* leftChild = new Op(1);
+    Base* rightChild = new Op(3);
+    Base* minus = new Sub(leftChild, rightChild);
+
+    EXPECT_EQ(minus->evaluate(), -2);
+    EXPECT_EQ(minus->stringify(), "1 - 3");
+}
+
+TEST(SubTest, SubZeroTest) {
+    Base* leftChild = new Op(7);
+    Base* rightChild = new Op(7);
+    Base* minus = new Sub(leftChild, rightChild);
+
+    EXPECT_EQ(minus->evaluate(), 0);
+    EXPECT_EQ(minus->stringify(), "7 - 7");                                     }
 
 #endif //__OP_TEST_HPP__
