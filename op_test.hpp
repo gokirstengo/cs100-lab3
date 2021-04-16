@@ -4,6 +4,7 @@
 #include "gtest/gtest.h"
 
 #include "op.hpp"
+#include "operator.hpp"
 
 //Op class tests
 TEST(OpTest, OpEvaluatePositive) {
