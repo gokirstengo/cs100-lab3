@@ -43,7 +43,7 @@ TEST(SubTest, SubPositiveTest) {
     Base* minus = new Sub(leftChild, rightChild);
 
     EXPECT_EQ(minus->evaluate(), 3);
-    EXPECT_EQ(minus->stringify(), "5 - 2");
+    EXPECT_EQ(minus->stringify(), "(5 - 2)");
 }
 
 TEST(SubTest, SubNegativeTest) {
@@ -52,7 +52,7 @@ TEST(SubTest, SubNegativeTest) {
     Base* minus = new Sub(leftChild, rightChild);
 
     EXPECT_EQ(minus->evaluate(), -2);
-    EXPECT_EQ(minus->stringify(), "1 - 3");
+    EXPECT_EQ(minus->stringify(), "(1 - 3)");
 }
 
 TEST(SubTest, SubZeroTest) {
@@ -61,6 +61,42 @@ TEST(SubTest, SubZeroTest) {
     Base* minus = new Sub(leftChild, rightChild);
 
     EXPECT_EQ(minus->evaluate(), 0);
-    EXPECT_EQ(minus->stringify(), "7 - 7");                                     }
+    EXPECT_EQ(minus->stringify(), "(7 - 7)");                                     }
 
+//Add class test
+TEST(AddTest, AddPositiveTest) {
+    Base* leftChild = new Op(5);
+    Base* rightChild = new Op(5);
+    Base* add = new Add(leftChild, rightChild);
+
+    EXPECT_EQ(add->evaluate(), 10);
+    EXPECT_EQ(add->stringify(), "(5 + 5)");
+}
+
+TEST(AddTest, AddNegativeTest) {
+    Base* leftChild = new Op(1);
+    Base* rightChild = new Op(-4);
+    Base* add = new Add(leftChild, rightChild);
+
+    EXPECT_EQ(add->evaluate(), -3);
+    EXPECT_EQ(add->stringify(), "(1 + -4)");
+}
+
+TEST(AddTest, AddTwoNegativeTest) {
+    Base* leftChild = new Op(-1);
+    Base* rightChild = new Op(-4);
+    Base* add = new Add(leftChild, rightChild);
+
+    EXPECT_EQ(add->evaluate(), -5);
+    EXPECT_EQ(add->stringify(), "(-1 + -4)");
+}
+
+TEST(AddTest, AddZeroTest) {
+    Base* leftChild = new Op(7.777);
+    Base* rightChild = new Op(0);
+    Base* add = new Add(leftChild, rightChild);
+
+    EXPECT_DOUBLE_EQ(add->evaluate(), 7.777);
+    EXPECT_EQ(add->stringify(), "(7.777000 + 0)");
+}
 #endif //__OP_TEST_HPP__

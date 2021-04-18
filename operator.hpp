@@ -26,9 +26,28 @@ class Sub: public Operator {
         }
         virtual string stringify() {
             string final = "";
+	    final += "(";
             final += leftChild->stringify();
             final += " - ";
             final += rightChild->stringify();
+	    final += ")";
+            return final;
+        }
+};
+
+class Add: public Operator {
+    public:
+        Add(Base* leftChild, Base* rightChild) : Operator(leftChild, rightChild) {}
+        virtual double evaluate() {
+            return leftChild->evaluate() + rightChild->evaluate();
+        }
+        virtual string stringify() {
+            string final = "";
+            final += "(";
+            final += leftChild->stringify();
+            final += " + ";
+            final += rightChild->stringify();
+            final += ")";
             return final;
         }
 };
