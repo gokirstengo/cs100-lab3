@@ -217,4 +217,59 @@ TEST(DivTest, DivIndeterminateTest) {
     EXPECT_TRUE(isnan(div->evaluate())); // cannot compare NaN to NaN
     EXPECT_EQ(div->stringify(), "(0 / 0)");
 }
+
+//Pow class tests
+TEST(PowTest, PosExponentTest) {
+    Base* leftChild = new Op(5);
+    Base* rightChild = new Op(2);
+    Base* pow = new Pow(leftChild, rightChild);
+
+    EXPECT_EQ(pow->evaluate(), 25);
+    EXPECT_EQ(pow->stringify(), "(5 ** 2)");
+}
+
+TEST(PowTest, NegExponentTest) {
+    Base* leftChild = new Op(2);
+    Base* rightChild = new Op(-1);
+    Base* pow = new Pow(leftChild, rightChild);
+
+    EXPECT_DOUBLE_EQ(pow->evaluate(), 0.5);
+    EXPECT_EQ(pow->stringify(), "(2 ** -1)");
+}
+
+TEST(PowTest, DecExponentTest) {
+    Base* leftChild = new Op(4);
+    Base* rightChild = new Op(0.5);
+    Base* pow = new Pow(leftChild, rightChild);
+
+    EXPECT_EQ(pow->evaluate(), 2);
+    EXPECT_EQ(pow->stringify(), "(4 ** 0.500000)");
+}
+
+TEST(PowTest, ZeroBaseTest) {
+    Base* leftChild = new Op(0);
+    Base* rightChild = new Op(2);
+    Base* pow = new Pow(leftChild, rightChild);
+
+    EXPECT_EQ(pow->evaluate(), 0);
+    EXPECT_EQ(pow->stringify(), "(0 ** 2)");
+}
+    
+TEST(PowTest, NegBaseTest) {
+    Base* leftChild = new Op(-1);
+    Base* rightChild = new Op(3);
+    Base* pow = new Pow(leftChild, rightChild);
+
+    EXPECT_EQ(pow->evaluate(), -1);
+    EXPECT_EQ(pow->stringify(), "(-1 ** 3)");
+    }
+
+TEST(PowTest, ZeroExponentTest) {
+    Base* leftChild = new Op(-7.777);
+    Base* rightChild = new Op(0);
+    Base* pow = new Pow(leftChild, rightChild);
+
+    EXPECT_EQ(pow->evaluate(), 1);
+    EXPECT_EQ(pow->stringify(), "(-7.777000 ** 0)");
+}
 #endif //__OP_TEST_HPP__
