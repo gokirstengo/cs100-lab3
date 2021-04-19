@@ -95,4 +95,21 @@ class Div: public Operator {
             return final;
         }
 };
+
+class Pow: public Operator {
+    public:
+        Pow(Base* leftChild, Base* rightChild) : Operator(leftChild, rightChild) {}
+        virtual double evaluate() {
+            return pow(leftChild->evaluate(), rightChild->evaluate());
+        }
+        virtual string stringify() {
+            string final = "";
+            final += "(";
+            final += leftChild->stringify();
+            final += " ** ";
+            final += rightChild->stringify();
+            final += ")";
+            return final;
+        }
+};
 #endif
