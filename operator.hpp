@@ -4,6 +4,7 @@
 #include "base.hpp"
 #include "op.hpp"
 #include <cmath>
+#include <limits>
 
 using namespace std;
 
@@ -69,4 +70,29 @@ class Mult: public Operator {
         }
 };
 
+class Div: public Operator {
+    public:
+        Div(Base* leftChild, Base* rightChild) : Operator(leftChild, rightChild) {}
+        virtual double evaluate() {
+            if (rightChild->evaluate() != 0)
+                return leftChild->evaluate() / rightChild->evaluate();
+            else {
+                if (leftChild->evaluate() > 0)
+                    return numeric_limits<double>::infinity();
+                else if (leftChild->evaluate() < 0)
+                    return -numeric_limits<double>::infinity();
+                else
+                    return numeric_limits<double>::quiet_NaN();
+            }
+        }
+        virtual string stringify() {
+            string final =  "";
+            final += "(";
+            final += leftChild->stringify();
+            final += " / ";
+            final += rightChild ->stringify();
+            final += ")";
+            return final;
+        }
+};
 #endif
