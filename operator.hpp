@@ -52,4 +52,21 @@ class Add: public Operator {
         }
 };
 
+class Mult: public Operator {
+    public:
+        Mult(Base* leftChild, Base* rightChild) : Operator(leftChild, rightChild) {}
+        virtual double evaluate() {
+            return leftChild->evaluate() * rightChild->evaluate();
+        }
+        virtual string stringify() {
+            string final = "";
+            final += "(";
+            final += leftChild->stringify();
+            final += " * ";
+            final += rightChild->stringify();
+            final += ")";
+            return final;
+        }
+};
+
 #endif

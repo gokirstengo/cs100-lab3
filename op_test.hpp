@@ -99,4 +99,50 @@ TEST(AddTest, AddZeroTest) {
     EXPECT_DOUBLE_EQ(add->evaluate(), 7.777);
     EXPECT_EQ(add->stringify(), "(7.777000 + 0)");
 }
+
+//Mult class tests
+TEST(MultTest, MultPositiveTest) {
+    Base* leftChild = new Op(5);
+    Base* rightChild = new Op(5);
+    Base* mult = new Mult(leftChild, rightChild);
+
+    EXPECT_EQ(mult->evaluate(), 25);
+    EXPECT_EQ(mult->stringify(), "(5 * 5)");
+}
+
+TEST(MultTest, MultNegativeTest) {
+    Base* leftChild = new Op(2);
+    Base* rightChild = new Op(-4);
+    Base* mult = new Mult(leftChild, rightChild);
+
+    EXPECT_EQ(mult->evaluate(), -8);
+    EXPECT_EQ(mult->stringify(), "(2 * -4)");
+}
+
+TEST(MultTest, MultTwoDecimalTest) {
+    Base* leftChild = new Op(0.5);
+    Base* rightChild = new Op(0.125);
+    Base* mult = new Mult(leftChild, rightChild);
+
+    EXPECT_DOUBLE_EQ(mult->evaluate(), 0.062500);
+    EXPECT_EQ(mult->stringify(), "(0.500000 * 0.125000)");
+}
+
+TEST(MultTest, MultTwoNegativeTest) {
+    Base* leftChild = new Op(-3);
+    Base* rightChild = new Op(-7);
+    Base* mult = new Mult(leftChild, rightChild);
+
+    EXPECT_EQ(mult->evaluate(), 21);
+    EXPECT_EQ(mult->stringify(), "(-3 * -7)");
+}
+
+TEST(MultTest, MultZeroTest) {
+    Base* leftChild = new Op(7.777);
+    Base* rightChild = new Op(0);
+    Base* mult = new Mult(leftChild, rightChild);
+
+    EXPECT_DOUBLE_EQ(mult->evaluate(), 0);
+    EXPECT_EQ(mult->stringify(), "(7.777000 * 0)");
+}
 #endif //__OP_TEST_HPP__
