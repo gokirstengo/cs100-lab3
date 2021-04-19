@@ -45,4 +45,29 @@ class Rand : public Base {
             }
         }
 };
+
+class SevenOpMock: public Base {
+    public:
+        SevenOpMock() { }
+
+        virtual double evaluate() { return 7.5; }
+        virtual string stringify() { return "7.5"; }
+};
+
+class NegativeEightOpMock: public Base {
+    public:
+        NegativeEightOpMock() { }
+
+        virtual double evaluate() { return -8; }
+        virtual string stringify() { return "-8"; }
+};
+
+class ZeroOpMock: public Base {
+    public:
+        ZeroOpMock() { }
+
+        virtual double evaluate() { return 0; }
+        virtual string stringify() { return "0"; }
+};
+
 #endif //__OP_HPP__
