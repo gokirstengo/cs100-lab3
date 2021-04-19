@@ -145,4 +145,63 @@ TEST(MultTest, MultZeroTest) {
     EXPECT_DOUBLE_EQ(mult->evaluate(), 0);
     EXPECT_EQ(mult->stringify(), "(7.777000 * 0)");
 }
+
+//Div class tests
+TEST(DivTest, DivPositiveRightTest) {
+    Base* leftChild = new Op(6);
+    Base* rightChild = new Op(12);
+    Base* div = new Div(leftChild, rightChild);
+
+    EXPECT_DOUBLE_EQ(div->evaluate(), 0.5);
+    EXPECT_EQ(div->stringify(), "(6 / 12)");
+}
+TEST(DivTest, DivEqualTest) {
+    Base* leftChild = new Op(5);
+    Base* rightChild = new Op(5);
+    Base* div = new Div(leftChild, rightChild);
+
+    EXPECT_EQ(div->evaluate(), 1);
+    EXPECT_EQ(div->stringify(), "(5 / 5)");
+}
+TEST(DivTest, DivPositiveleftChildTest) {
+    Base* leftChild = new Op(25);
+    Base* rightChild = new Op(5);
+    Base* div = new Div(leftChild, rightChild);
+
+    EXPECT_EQ(div->evaluate(), 5);
+    EXPECT_EQ(div->stringify(), "(25 / 5)");
+}
+TEST(DivTest, DivZeroTest) {
+    Base* leftChild = new Op(0);
+    Base* rightChild = new Op(33);
+    Base* div = new Div(leftChild, rightChild);
+
+    EXPECT_EQ(div->evaluate(), 0);
+    EXPECT_EQ(div->stringify(), "(0 / 33)");
+}
+TEST(DivTest, DivPositiveUndefinedTest) {
+    Base* leftChild = new Op(15);
+    Base* rightChild = new Op(0);
+    Base* div = new Div(leftChild, rightChild);
+
+    EXPECT_EQ(div->evaluate(), numeric_limits<double>::infinity());
+    EXPECT_EQ(div->stringify(), "(15 / 0)");
+}
+TEST(DivTest, DivNegativeUndefinedTest) {
+    Base* leftChild = new Op(-20);
+    Base* rightChild = new Op(0);
+    Base* div = new Div(leftChild, rightChild);
+
+    EXPECT_EQ(div->evaluate(), -numeric_limits<double>::infinity());
+    EXPECT_EQ(div->stringify(), "(-20 / 0)");
+}
+TEST(DivTest, DivIndeterminateTest) {
+    Base* leftChild = new Op(0);
+    Base* rightChild = new Op(0);
+    Base* div = new Div(leftChild, rightChild);
+
+    // EXPECT_EQ(div->evaluate(), numeric_limits<double>::quiet_NaN());
+    EXPECT_TRUE(isnan(div->evaluate())); // cannot compare NaN to NaN
+    EXPECT_EQ(div->stringify(), "(0 / 0)");
+}
 #endif //__OP_TEST_HPP__
