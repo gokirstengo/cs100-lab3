@@ -36,6 +36,19 @@ TEST(OpTest, OpStringZero) {
     EXPECT_EQ(test6->stringify(), "0");
 }
 
+//Rand class tests
+TEST(RandTest, RandStayInRange) {
+    Base* val = new Rand();
+
+    EXPECT_LT(-1, val->evaluate());
+    EXPECT_LT(val->evaluate(), 100);
+}
+TEST(RandTest, RnadStringify) {
+    Base* val = new Rand();
+
+    EXPECT_EQ(val->stringify(), to_string(static_cast<int>(val->evaluate())));
+}
+
 //Sub class test
 TEST(SubTest, SubPositiveTest) {
     Base* leftChild = new Op(5);

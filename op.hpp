@@ -3,6 +3,9 @@
 #define __OP_HPP__
 
 #include "base.hpp"
+#include <ctime>
+
+using namespace std;
 
 class Op : public Base {
     protected:
@@ -24,4 +27,22 @@ class Op : public Base {
 	}
 };
 
+class Rand : public Base {
+    private:
+        double value;
+    public:
+        Rand() : Base() {
+	    srand(time(0));
+	    value = rand() % 100;
+        }
+        virtual double evaluate() { return value; }
+        virtual std::string stringify() { 
+            if (value == static_cast<int>(value)) {
+                return to_string(static_cast<int>(value)); 
+            }
+            else {
+                return to_string(value);
+            }
+        }
+};
 #endif //__OP_HPP__
